@@ -8,7 +8,7 @@ const secretKey = process.env.PRIVATE_KEY;
 
 //VERIFIES THE USER SESSION THROUGH TOKEN
 export const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
-  const token = req.header('Authorization').split("Bearer ")[1];
+  const token = req.cookies.sessionToken;
 
   if (!token) {
     return res.status(401).json({ error: 'Access denied. No token provided' });

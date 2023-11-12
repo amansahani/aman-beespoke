@@ -57,6 +57,7 @@ export const loginUser = async (req: Request, res: Response) => {
   try {
     const token = jwt.sign({ userId: user.Id }, secretKey, { expiresIn: '1w' });
     await updateUserToken(user.Id, token);
+    res.cookie('sessionToken', token, {maxAge: 1000 * 30});
 
   return res.status(200).json({ "token" : token });
   } catch (error) {

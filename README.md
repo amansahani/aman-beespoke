@@ -63,11 +63,12 @@ Aman'sBeekpoke.ai Backend is a Node.js Express application with a CockroachDB da
 3. Search
 
 - Accepts parameters: search (JSON with child parameters - keywords, minPrice (Optional), maxPrice (Optional))
+- example: req.body = {search: {keywords: "Jeans", minPrice: 200, maxPrice: 300}}
 - URL: http://localhost:9001/catalog/search
 
 4. Recommendation
 
-- Accepts parameter: Bearer token in Authorization header
+- Accepts parameter: NONE, Session Cookie does all the work.
 - URL: http://localhost:9001/catalog/recommend
 
 ## Security
