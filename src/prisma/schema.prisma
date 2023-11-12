@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+model user_creds {
+  Id                 String  @id @unique @default(uuid())
+  Username           String  @unique
+  Customer_name      String
+  Gender             String
+  Preffered_category String?
+  Password           String
+  Token              String?
+}
+
+model catalog {
+  Product_id          Int    @id @unique
+  Product_category    String
+  Rank                Int
+  Brand_name          String
+  Product_description String
+  Price               Int
+  Image_link          String
+}
