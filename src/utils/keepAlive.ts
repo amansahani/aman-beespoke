@@ -1,6 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 import * as xlsx from 'xlsx';
 import * as fs from 'fs/promises';
+import { findUserByUsername } from '../models/users';
+import { searchByKeyword } from '../models/catalog';
 
 const prisma = new PrismaClient();
 
@@ -61,7 +63,12 @@ importData("/home/tomi/Downloads/catalog.xlsx")
  */
 
 // TO KEEP DATABASE ALIVE
-setInterval(async () => console.log(prisma.tempo.findFirst({ where: { name: 'prisma' } })), 2000 * 60);
+setInterval(async () => {
+  console.log("AWAKE DB"); 
+  console.log((await prisma.tempo.findFirst({ where: { name: 'prisma' } })).name)
+  console.log((await findUserByUsername("raman@gmail.com")).Gender);
+  console.log(await searchByKeyword({keywords: "FUNDAY"})[0]);  
+}, 2000 * 60);
 
 const dummy = ()=> "dummy";
 

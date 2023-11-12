@@ -73,4 +73,4 @@ Aman'sBeekpoke.ai Backend is a Node.js Express application with a CockroachDB da
 
 ## Security
 
-- This project uses JWT for session tokens and bcrypt for password encryption. The default algorithm for jwt is  bcrypt.hash, and for jwt session token is H256 algorithm.
+- This project uses JWT for session tokens and bcrypt for password encryption. The default algorithm for jwt is  bcrypt.hash, and for jwt session token is HS256 algorithm.
