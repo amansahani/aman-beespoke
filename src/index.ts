@@ -17,6 +17,10 @@ app.use(cookieParser());
 app.use('/catalog', catalogRouter);
 //CATALOG ROUTES INCLUDES REGISTRATION AND LOGIN
 app.use('/auth', authRouter);
+//HOME
+app.get('/', (req: express.Request, res: express.Response)=>{
+  res.send("Welcome TO HOME PAGE!")
+})
 
 
 //AS I AM USING FREE TIER COCROACH DB IT GET SLEEPS AFTER IDLE MINUTES
