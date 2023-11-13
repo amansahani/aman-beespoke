@@ -65,7 +65,6 @@ importData("/home/tomi/Downloads/catalog.xlsx")
 // TO KEEP DATABASE ALIVE
 setInterval(async () => {
   console.log("AWAKE DB"); 
-  console.log((await prisma.tempo.findFirst({ where: { name: 'prisma' } })).name)
   console.log((await findUserByUsername("raman@gmail.com")).Gender);
   console.log(await searchByKeyword({keywords: "FUNDAY"})[0]);  
 }, 2000 * 60);
