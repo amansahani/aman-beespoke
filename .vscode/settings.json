@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/06325682-5365-4204-8134-8f7219005c1e/resourceGroups/aman-beespoke_group-b6bf/providers/Microsoft.Web/sites/aman-beespoke",
+    "appService.deploySubpath": "."
+}
