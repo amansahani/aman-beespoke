@@ -11,8 +11,11 @@ const secretKey = process.env.PRIVATE_KEY;
 //REGISTER USER
 
 export const registerUser = async (req: Request, res: Response) => {
-  const { Username, Customer_name, Gender, Preffered_category, Password }  = req.body;
-
+  let { Username, Customer_name, Gender, Preffered_category, Password }  = req.body;
+  if(!Username || !Customer_name || !Gender || Password){
+    return res.status(400).json({message : "Bad Request"});
+  }
+  Username = Username.trim().toLowerCase();
   //Adding SALTS to PASSWORD
 
   const saltRounds = 10;
@@ -39,9 +42,14 @@ export const registerUser = async (req: Request, res: Response) => {
 };
 
 //LOGIN USER
-export const loginUser = async (req: Request, res: Response) => {
-  const { Username, Password } = req.body;
-
+export const loginUser = async (req: Request, res: Response) => { 
+  let { Username, Password } = req.body;
+  
+  if(!Username || !Password){
+    return res.status(400).json({message : "Bad Request"});
+  }
+  Username = Username.trim().toLowerCase();
+  
   const user = await findUserByUsername(Username);
   //Account is not available
   if (!user) {
@@ -57,9 +65,13 @@ export const loginUser = async (req: Request, res: Response) => {
   try {
     const token = jwt.sign({ userId: user.Id }, secretKey, { expiresIn: '1w' });
     await updateUserToken(user.Id, token);
-    res.cookie('sessionToken', token, {maxAge: 1000 * 30});
+    res.cookie('sessionToken', token, 
+    {maxAge: 1000 * 60 * 60 * 24 * 7, 
+      sameSite: 'strict',
+      
+    httpOnly: true });
 
-  return res.status(200).json({ "token" : token });
+  return res.status(200).json({ "message" : "Success" });
   } catch (error) {
     console.log(error);
     return res.status(400).json({ "error" : "Login Failed"});
