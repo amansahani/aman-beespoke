@@ -19,7 +19,7 @@ app.use(cookieParser());
 
 app.use(cors({
   credentials: true,
-  origin: 'http://localhost:3000', // Replace with the actual origin of your React app
+  origin: ['http://localhost:3000', 'https://amansahani.vercel.app'] // Replace with the actual origin of your React app
 }));
 
 app.use((req, res, next) => {

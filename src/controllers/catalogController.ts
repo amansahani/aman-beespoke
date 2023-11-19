@@ -11,12 +11,12 @@ interface Search {
 
 //SEARCH CONTROLLER
 export const searchController = async (req : express.Request, res : express.Response) =>{
-    let {keywords, minPrice, maxPrice} : Search = req.body.search;
-    if(!keywords){
+
+    if(!req.body.search || !req.body.search.keywords){
         return res.status(400).json({message : "Bad Request"});
     }
-    
-    
+
+    let {keywords, minPrice, maxPrice} : Search = req.body.search;
 
     if(keywords && minPrice && maxPrice){
         minPrice = parseInt(minPrice as string);
