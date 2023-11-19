@@ -12,7 +12,7 @@ const secretKey = process.env.PRIVATE_KEY;
 
 export const registerUser = async (req: Request, res: Response) => {
   let { Username, Customer_name, Gender, Preffered_category, Password }  = req.body;
-  if(!Username || !Customer_name || !Gender || Password){
+  if(!Username || !Customer_name || !Gender || !Password){
     return res.status(400).json({message : "Bad Request"});
   }
   Username = Username.trim().toLowerCase();
@@ -66,10 +66,11 @@ export const loginUser = async (req: Request, res: Response) => {
     const token = jwt.sign({ userId: user.Id }, secretKey, { expiresIn: '1w' });
     await updateUserToken(user.Id, token);
     res.cookie('sessionToken', token, 
-    {maxAge: 1000 * 60 * 60 * 24 * 7, 
+    {
+      maxAge: 1000 * 60 * 60 * 24 * 7, 
       sameSite: 'strict',
-      
-    httpOnly: true });
+      secure: true
+    });
 
   return res.status(200).json({ "message" : "Success" });
   } catch (error) {
